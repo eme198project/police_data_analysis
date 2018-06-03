@@ -1,0 +1,631 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{LinReg}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{linregress} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{df15} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UpdatedState2015.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}adds column \PYZsq{}DeathsNorm\PYZsq{}, deaths per million in 2015}
+         \PY{n}{df15}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{df15}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{1e6}\PY{p}{)}\PY{o}{/}\PY{n}{df15}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df15state}\PY{o}{=}\PY{n}{df15}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{51}\PY{p}{]}
+         \PY{n}{df15state}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mcdonalds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1492}
+         \PY{n}{df15state}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mcdonalds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1224}
+         
+         \PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mcdonalds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mcdonalds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df15state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/jjleung/anaconda2/lib/python2.7/site-packages/ipykernel\_launcher.py:8: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:}                    State  Population  Deaths  UnemRate  UnemRank    Gini  \textbackslash{}
+         1                Alabama     4858979      19       6.1      42.0  0.4811   
+         2                 Alaska      738432       5       6.5      47.0  0.4322   
+         3                Arizona     6828065      44       6.1      42.0  0.4702   
+         4               Arkansas     2978204       5       5.0      24.0  0.4773   
+         5             California    39144818     211       6.2      44.0  0.4876   
+         6               Colorado     5456574      32       3.9      10.0  0.4580   
+         7            Connecticut     3590886       4       5.7      34.0  0.4916   
+         8               Delaware      945934       7       4.9      22.0  0.4523   
+         9   District of Columbia      672228       4       6.9      51.0  0.5354   
+         10               Florida    20271272      71       5.5      31.0  0.4872   
+         11               Georgia    10214860      39       6.0      38.0  0.4801   
+         12                Hawaii     1431603       5       3.6       5.0  0.4346   
+         13                 Idaho     1654930       8       4.2      11.0  0.4525   
+         14              Illinois    12859995      23       6.0      38.0  0.4817   
+         15               Indiana     6619680      21       4.8      20.0  0.4519   
+         16                  Iowa     3123899       5       3.8       9.0  0.4393   
+         17                Kansas     2911641      11       4.2      11.0  0.4596   
+         18              Kentucky     4425092      19       5.3      27.0  0.4781   
+         19             Louisiana     4670724      27       6.3      45.0  0.4909   
+         20                 Maine     1329328       2       4.4      15.0  0.4523   
+         21              Maryland     6006401      17       5.1      26.0  0.4524   
+         22         Massachusetts     6794422      10       4.8      20.0  0.4848   
+         23              Michigan     9922576      20       5.4      30.0  0.4667   
+         24             Minnesota     5489594      13       3.7       8.0  0.4492   
+         25           Mississippi     2992333      12       6.4      46.0  0.4759   
+         26              Missouri     6083672      21       5.0      24.0  0.4634   
+         27               Montana     1032949       4       4.2      11.0  0.4623   
+         28              Nebraska     1896190       9       3.0       2.0  0.4473   
+         29                Nevada     2890845      19       6.8      50.0  0.4548   
+         30         New Hampshire     1330608       3       3.4       4.0  0.4347   
+         31            New Jersey     8958013      24       5.8      37.0  0.4832   
+         32            New Mexico     2085109      21       6.5      47.0  0.4795   
+         33              New York    19795791      27       5.3      27.0  0.5138   
+         34        North Carolina    10042802      26       5.7      34.0  0.4776   
+         35          North Dakota      756927       1       2.8       1.0  0.4664   
+         36                  Ohio    11613423      36       4.9      22.0  0.4637   
+         37              Oklahoma     3911338      37       4.4      15.0  0.4702   
+         38                Oregon     4028977      17       5.6      32.0  0.4622   
+         39          Pennsylvania    12802503      24       5.3      27.0  0.4685   
+         40          Rhode Island     1056298       1       6.0      38.0  0.4732   
+         41        South Carolina     4896146      21       6.0      38.0  0.4698   
+         42          South Dakota      858469       2       3.1       3.0  0.4436   
+         43             Tennessee     6600299      21       5.6      32.0  0.4789   
+         44                 Texas    27469114     112       4.4      15.0  0.4823   
+         45                  Utah     2995919      10       3.6       5.0  0.4252   
+         46               Vermont      626042       1       3.6       5.0  0.4452   
+         47              Virginia     8382993      22       4.5      18.0  0.4681   
+         48            Washington     7170351      23       5.7      34.0  0.4561   
+         49         West Virginia     1844128      12       6.7      49.0  0.4581   
+         50             Wisconsin     5771337      12       4.5      18.0  0.4410   
+         
+             Poverty  Mcdonalds  Mcd10K  DeathsNorm  
+         1      18.5        279    5.74    3.910287  
+         2      10.3         31    4.20    6.771104  
+         3      17.4        292    4.28    6.443993  
+         4      19.1        184    6.18    1.678864  
+         5      15.3       1492    3.81    5.390241  
+         6      11.5        237    4.34    5.864486  
+         7      10.5        157    4.37    1.113931  
+         8      12.4         44    4.65    7.400093  
+         9      17.3         19    2.83    5.950362  
+         10     15.7        986    4.86    3.502494  
+         11     17.0        511    5.00    3.817967  
+         12     10.6         65    4.54    3.492588  
+         13     15.1         69    4.17    4.834041  
+         14     13.6        738    5.74    1.788492  
+         15     14.5        392    5.92    3.172359  
+         16     12.2        173    5.54    1.600564  
+         17     13.0        184    6.32    3.777938  
+         18     18.5        261    5.90    4.293696  
+         19     19.6        291    6.23    5.780688  
+         20     13.4         72    5.42    1.504520  
+         21      9.7        375    6.24    2.830314  
+         22     11.5        297    4.37    1.471796  
+         23     15.8        631    6.36    2.015606  
+         24     10.2        282    5.14    2.368117  
+         25     22.0        162    5.41    4.010249  
+         26     14.8        368    6.05    3.451863  
+         27     14.6         55    5.32    3.872408  
+         28     12.6         89    4.69    4.746360  
+         29     14.7        155    5.36    6.572473  
+         30      8.2         69    5.19    2.254608  
+         31     10.8        311    3.47    2.679166  
+         32     20.4        100    4.80   10.071416  
+         33     15.4        767    3.87    1.363926  
+         34     16.4        475    4.73    2.588919  
+         35     11.0         29    3.83    1.321131  
+         36     14.8        823    7.09    3.099861  
+         37     16.1        217    5.55    9.459679  
+         38     15.4        205    5.09    4.219433  
+         39     13.2        583    4.55    1.874633  
+         40     13.9         44    4.17    0.946703  
+         41     16.6        258    5.27    4.289088  
+         42     13.7         36    4.19    2.329729  
+         43     16.7        393    5.95    3.181674  
+         44     15.9       1224    4.46    4.077307  
+         45     11.3        111    3.71    3.337874  
+         46     10.2         30    4.79    1.597337  
+         47     11.2        445    5.31    2.624361  
+         48     12.2        326    4.55    3.207653  
+         49     17.9        101    5.48    6.507141  
+         50     12.1        341    5.91    2.079241  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} Regression line and results for populations (predictor variable) to death (response variable)}
+         \PY{n}{model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{modelFit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{modelFit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{linregress}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}x and y are arrays or lists.}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{State Population and Deaths per State}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} Text(0.5,1,u'State Population and Deaths per State')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} Regression line and results for Gini (predictor variable) to Death/1M (response variable)}
+         \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UnemRate}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{modelFit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{modelFit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{linres}\PY{o}{=}\PY{n}{linregress}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}x and y are arrays or lists.}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deaths Normalized per State}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s Unemployment Rates}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{linres}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} LinregressResult(slope=0.6710301216146493, intercept=0.33267889830393527, rvalue=0.3498342249871739, pvalue=0.012760647631430857, stderr=0.2593650010253003)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} Regression line and results for Gini (predictor variable) to Death/1M (response variable)}
+         \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gini}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{modelFit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{modelFit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{linres}\PY{o}{=}\PY{n}{linregress}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}x and y are arrays or lists.}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deaths Normalized per State}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s Gini Index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{linres}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} LinregressResult(slope=4.720560195579736, intercept=1.5298614485734228, rvalue=0.0467540387093394, pvalue=0.747137931937227, stderr=14.557225141783737)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} Regression line and results for Gini (predictor variable) to Death/1M (response variable)}
+         \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Poverty}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{modelFit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{modelFit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{linres}\PY{o}{=}\PY{n}{linregress}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}x and y are arrays or lists.}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deaths Normalized per Poverty Level}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{linres}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} LinregressResult(slope=0.2708418186722187, intercept=-0.14117920557751917, rvalue=0.4025347672719408, pvalue=0.0037548467401469833, stderr=0.08890063088186204)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} Regression line and results for Gini (predictor variable) to Death/1M (response variable)}
+         \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mcd10K}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{modelFit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{modelFit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{linres}\PY{o}{=}\PY{n}{linregress}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}x and y are arrays or lists.}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deaths Normalized per McDonald Stores}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{linres}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} LinregressResult(slope=-0.1504427126340053, intercept=4.4858173203280645, rvalue=-0.06362965798871371, pvalue=0.6606651970097654, stderr=0.3405728252916324)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} Regression line and results for Unemployment Rate (predictor variable) to Poverty (response variable)}
+         \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UnemRate}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Poverty}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{modelFit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{modelFit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{linres}\PY{o}{=}\PY{n}{linregress}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}x and y are arrays or lists.}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{State}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s Unemployment Rate per State}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s Poverty Level}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{n}{linres}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} LinregressResult(slope=1.6378352609542763, intercept=6.0020022385275436, rvalue=0.5745169167751389, pvalue=1.2831900122499982e-05, stderr=0.3367918638750994)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Regression line and results for Gini (predictor variable) to Death/1M (response variable)}
+        \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mcdonalds}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{modelFit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{modelFit}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{linres}\PY{o}{=}\PY{n}{linregress}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df15state}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}x and y are arrays or lists.}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deaths Normalized per State}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s McDonald Stores}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        
+        \PY{n}{linres}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{r}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{Q1} \PY{o}{=} \PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{n}{Q2} \PY{o}{=} \PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.50}\PY{p}{)}
+         \PY{n}{Q3} \PY{o}{=} \PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.75}\PY{p}{)}
+         \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(} \PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths per 1M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{United States}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Summary of Deaths Normalized per State}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{Q1}\PY{p}{,}\PY{n}{Q2}\PY{p}{,}\PY{n}{Q3}\PY{p}{,}\PY{n}{s}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(2.123082787948654, 3.3948682898043216, 4.633193864454226, 2.064029962628827)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df15state}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DeathsNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths per 1M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histogram of Deaths Normalized}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
